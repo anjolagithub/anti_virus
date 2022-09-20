@@ -1,0 +1,52 @@
+body{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: #e0eafe
+}
+.container{
+  max-width: 650px;
+  width: 100%;
+  padding: 30px;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+.drag-area{
+  height: 400px;
+  border: 3px dashed #e0eafc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin: 10px auto;
+}
+h1{
+  margin-bottom: 20px;
+}
+.drag-area .icon{
+  font-size: 50px;
+  font-weight: 500;
+  color: #1683ff;
+}
+.drag-area .header{
+  font-size: 20px;
+  font-weight: 500;
+  color: #34495e
+}
+.drag-area .btns{
+  font-size: 20px;
+  font-weight: 500;
+  color: #1683ff;
+  cursor: pointer;
+}
+.cos{
+  border: 2px solid rgb(68, 166, 101)
+}
+.cus{
+  border: 2px solid #1683ff;
+}
+.cust{
+  border: 2px solid #ff4816;
+}
