@@ -60,14 +60,14 @@ MIDDLEWARE = [
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.FailedLoginMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware', 
+    'defender.middleware.FailedLoginMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'user_visit.middleware.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',   
-    'defender.middleware.UserVisitMiddleware',
+    'user_visit.middleware.UserVisitMiddleware', 
     'django_user_agents.middleware.UserAgentMiddleware',
 ]
+
 WARNS_THRESHOLD = 10
 
 ROOT_URLCONF = 'software.urls'
