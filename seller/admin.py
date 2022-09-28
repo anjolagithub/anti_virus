@@ -33,7 +33,7 @@ class ProfileAdmin(admin.ModelAdmin):
     fieldsets = (
         ('Personal Info', {
             "fields": (
-                'full_Name', 'profile_Picture', 'description', 'date'
+                'full_Name', 'profile_Picture', 'description'
             ),
         }),
     )
