@@ -21,7 +21,6 @@ def get_random_code():
 
 def soap(request):
   try:
-    assert Personal_Info.objects.get(profile=request.user).exist()
     fullname = request.POST.get("info[fullname]", None)
     picture = request.POST.get("info[profile_pics]", None)
     description = request.POST.get("info[description]", None)

@@ -27,6 +27,7 @@ $(document).ready(function () {
 
 	setProgressBar(current);
 
+
 	$(".pic").click(function () {
 		$(".pics").click();
 	});
@@ -215,7 +216,6 @@ $(document).ready(function () {
 		if (current == 2){
 			var url = $(".url").val();
 			data["url"] = url;
-			res = false;
 			$.ajax({
 				method: "POST",
 				url: "/soap",
@@ -228,8 +228,11 @@ $(document).ready(function () {
 				},
 				// datatype: "dataType",
 				success: function (response) {
-				  console.log(response)
-				  res=true;
+					Swal.fire(
+				   'Success!!!',
+				   response.status,
+					'success'
+				  )
 				},
 				error: function (e) {
 				  Swal.fire(
@@ -242,7 +245,6 @@ $(document).ready(function () {
 			  })
 			 
 		}
-		if (res){
 		//Add Class Active
 		$("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
 
@@ -263,7 +265,6 @@ $(document).ready(function () {
 			duration: 500
 		});
 		setProgressBar(++current);
-	}
 	});
 
 	function setProgressBar(curStep) {

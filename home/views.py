@@ -23,21 +23,25 @@ def metas(request):
     signer = Signer()
     value = signer.sign(request.user)
     context = {
-        "u_token": value
+        "u_token": value,
+        "page": "meta"
     }
+    print(some.is_seller)
     if some.is_seller == False:
         return render(request, 'profile/profile.html', context)
-    return render(request, 'account/decisions.html', context)
+    return render(request, 'meta/index.html', context)
 
 def projects(request):
     some = Personal_Info(profile = request.user)
     value = request.user
     context = {
-        "u_token": value
+        "u_token": value,
+        "page": "project"
     }
+    print(some.is_seller)
     if some.is_seller == False:
         return render(request, 'profile/profile.html', context)
-    return render(request, 'account/decisions.html', context)
+    return render(request, 'meta/indexs.html', context)
 
 def feedback(request):
     if request.method == 'POST':

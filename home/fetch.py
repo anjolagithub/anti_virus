@@ -23,15 +23,15 @@ def search_f(request):
   paramo = request.GET.get("skill", None)
   params = request.GET.get("skill", None)
   if paraml:
-    level = Language_Levels.objects.get(language=paraml)
+    level = Language_Levels.objects.filter(language__unaccent__icontains=paraml)
     datas = level.name
     return JsonResponse({"result": datas})
   elif paramo:
-    level = Occupation_list.objects.get(occupations=paramo)
+    level = Occupation_list.objects.filter(occupations__unaccent__icontains=paramo)
     datas = level.name
     return JsonResponse({"result": datas})
   elif params:
-    level = Skill_list.objects.get(skiller=params)
+    level = Skill_list.objects.filter(skiller__unaccent__icontains=params)
     datas = level.name
     return JsonResponse({"result": datas})
   else:

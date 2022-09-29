@@ -1,0 +1,570 @@
+{% load static %}
+<!doctype html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <title>Snippet - BBBootstrap</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link href="{% static 'dist/css/bootstrap.min.css' %}" rel='stylesheet'>
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css' rel='stylesheet'>
+    <script type='text/javascript' src="{% static 'dist/js/jquery.js' %}"></script>
+    <script type='text/javascript' src="{% static 'dist/js/sweetalert.js' %}"></script>
+    <style>
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        /* Track */
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+        }
+
+        /* Handle on hover */
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            height: 100%;
+        }
+
+        p {
+            color: grey;
+        }
+
+        #heading {
+            text-transform: uppercase;
+            color: #673AB7;
+            font-weight: normal;
+        }
+
+        #msform {
+            text-align: center;
+            position: relative;
+            margin-top: 20px;
+        }
+
+        #msform fieldset {
+            background: white;
+            border: 0 none;
+            border-radius: 0.5rem;
+            box-sizing: border-box;
+            width: 100%;
+            margin: 0;
+            padding-bottom: 20px;
+
+            /*stacking fieldsets above each other*/
+            position: relative;
+        }
+
+        .form-card {
+            text-align: left;
+        }
+
+        /*Hide all except first fieldset*/
+        #msform fieldset:not(:first-of-type) {
+            display: none;
+        }
+
+        #msform input,
+        #msform textarea {
+            padding: 8px 15px 8px 15px;
+            border: 1px solid #ccc;
+            border-radius: 0px;
+            margin-bottom: 25px;
+            margin-top: 2px;
+            width: 100%;
+            box-sizing: border-box;
+            font-family: montserrat;
+            color: #2C3E50;
+            background-color: #ECEFF1;
+            font-size: 16px;
+            letter-spacing: 1px;
+        }
+
+        #msform input:focus,
+        #msform textarea:focus {
+            -moz-box-shadow: none !important;
+            -webkit-box-shadow: none !important;
+            box-shadow: none !important;
+            border: 1px solid #673AB7;
+            outline-width: 0;
+        }
+
+        /*Next Buttons*/
+        #msform .action-button {
+            width: 100px;
+            background: #673AB7;
+            font-weight: bold;
+            color: white;
+            border: 0 none;
+            border-radius: 0px;
+            cursor: pointer;
+            padding: 10px 5px;
+            margin: 10px 0px 10px 5px;
+            float: right;
+        }
+
+        #msform .action-button:hover,
+        #msform .action-button:focus {
+            background-color: #311B92;
+        }
+
+        /*Previous Buttons*/
+        #msform .action-button-previous {
+            width: 100px;
+            background: #616161;
+            font-weight: bold;
+            color: white;
+            border: 0 none;
+            border-radius: 0px;
+            cursor: pointer;
+            padding: 10px 5px;
+            margin: 10px 5px 10px 0px;
+            float: right;
+        }
+
+        #msform .action-button-previous:hover,
+        #msform .action-button-previous:focus {
+            background-color: #000000;
+        }
+
+        /*The background card*/
+        .card {
+            z-index: 0;
+            border: none;
+            position: relative;
+        }
+
+        /*FieldSet headings*/
+        .fs-title {
+            font-size: 25px;
+            color: #36377d;
+            margin-bottom: 15px;
+            font-weight: normal;
+            text-align: left;
+        }
+
+        .purple-text {
+            color: #36377d;
+            font-weight: normal;
+        }
+
+        /*Step Count*/
+        .steps {
+            font-size: 25px;
+            color: gray;
+            margin-bottom: 10px;
+            font-weight: normal;
+            text-align: right;
+        }
+
+        /*Field names*/
+        .fieldlabels {
+            color: gray;
+            text-align: left;
+        }
+
+        /*Icon progressbar*/
+        #progressbar {
+            margin-bottom: 30px;
+            overflow: hidden;
+            color: lightgrey;
+        }
+
+        #progressbar .active {
+            color: #36377d;
+        }
+
+        #progressbar li {
+            list-style-type: none;
+            font-size: 15px;
+            width: 25%;
+            float: left;
+            position: relative;
+            font-weight: 400;
+        }
+
+        /*Icons in the ProgressBar*/
+        #progressbar #account:before {
+            font-family: FontAwesome;
+            content: "\f13e";
+        }
+
+        #progressbar #personal:before {
+            font-family: FontAwesome;
+            content: "\f007";
+        }
+
+        #progressbar #payment:before {
+            font-family: FontAwesome;
+            content: "\f030";
+        }
+
+        #progressbar #confirm:before {
+            font-family: FontAwesome;
+            content: "\f00c";
+        }
+
+        /*Icon ProgressBar before any progress*/
+        #progressbar li:before {
+            width: 50px;
+            height: 50px;
+            line-height: 45px;
+            display: block;
+            font-size: 20px;
+            color: #ffffff;
+            background: lightgray;
+            border-radius: 50%;
+            margin: 0 auto 10px auto;
+            padding: 2px;
+        }
+
+        /*ProgressBar connectors*/
+        #progressbar li:after {
+            content: '';
+            width: 100%;
+            height: 2px;
+            background: lightgray;
+            position: absolute;
+            left: 0;
+            top: 25px;
+            z-index: -1;
+        }
+
+        /*Color number of the step and the connector before it*/
+        #progressbar li.active:before,
+        #progressbar li.active:after {
+            background: #36377d;
+        }
+
+        /*Animated Progress Bar*/
+        .progress {
+            height: 20px;
+        }
+
+        .progress-bar {
+            background-color: #36377d;
+        }
+
+        /*Fit image in bootstrap div*/
+        .fit-image {
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .cus {
+            width: 100px;
+            height: 100px;
+            margin: auto;
+            object-fit: cover;
+        }
+
+        .cos {
+            width: 100vw;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="cos col-12 text-center px-5 mt-3 mb-2">
+                <div class="card px-5 pt-4 pb-0 mt-3 mb-3">
+                    <p>Let Create Your Profile First</p>
+
+                    <form id="msform">
+                        {% csrf_token %}
+                        <input type="hidden" class="u_token" value="{{u_token}}">
+                        <!-- progressbar -->
+                        <ul id="progressbar">
+                            <li class="active" id="personal"><strong>overview</strong></li>
+                            <li id="account"><strong>Pricing</strong></li>
+                            <li id="confirm"><strong>Description & FAQ</strong></li>
+                            <li id="confirm"><strong>Requirement</strong></li>
+                            <li id="confirm"><strong>Gallery</strong></li>
+                            <li id="confirm"><strong>Publish</strong></li>
+                        </ul>
+                        <br>
+                        <!-- fieldsets -->
+                        <fieldset>
+                            
+                            <div class="row mb-5">
+                                <div class="col-3">
+                                    <label for="exampleFormControlTextarea1" class="form-label">GIG TITLE<span
+                                            class="text-danger">*</span></label>
+                                </div>
+                                <div class="col-9">
+                                    <textarea class="form-control desc" id="exampleFormControlTextarea1" rows="4" placeholder="I will do something I'm really good at"></textarea>
+                                </div>
+                            </div>
+                            <div class="row mb-5">
+                                <div class="col-3">
+                                    <label for="exampleFormControlInput1"
+                                        class="form-label text-lg-start m-0">CATEGORY<span
+                                            class="text-danger">*</span></label>
+                                </div>
+                                <div class="col-5">
+                                    <input type="text" class="form-control skill" id="exampleFormControlInput1"
+                                        placeholder="SELECT A CATEGORY" required>
+                                </div>
+                                <div class="col-4">
+                                    <input type="text" class="form-control level" id="exampleFormControlInput1"
+                                        placeholder="SELECT A SUBCATEGORY" required>
+                                </div>
+                            </div>
+                            <div class="row mb-5">
+                                <div class="col-3">
+                                    <label for="exampleFormControlTextarea1" class="form-label">SEARCH TAGS<span
+                                            class="text-danger">*</span></label>
+                                </div>
+                                <div class="col-9">
+                                    <textarea class="form-control desc" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <h6 class="text-primary align-items-end mb-5 cursor btn addo">+Add New</h6>
+                                </div>
+                                <div class="col-12 occupv">
+                                    
+                                </div>
+                            </div>
+
+                            <p class="lead"><span class="danger">Please note: </span>Some categories require that sellers verify their skills.</p>
+                            <input type="button" name="next" class="next action-button" value="Continue" />
+                        </fieldset>
+                        <fieldset>
+                            <div class="row mb-5">
+                                
+                                <div class="col-12">
+                                    <h6 class="text-primary align-items-end mb-5 cursor btn addo">+Add New</h6>
+                                </div>
+                                <div class="col-12 occupv">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="flush-heading-1">
+                                          <button
+                                            class="accordion-button collapsed"
+                                            type="button"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#flush-collapse-1"
+                                            aria-expanded="false"
+                                            aria-controls="flush-collapse-1"
+                                          >
+                                            Free
+                                          </button>
+                                        </h2>
+                                        <div
+                                          id="flush-collapse-1"
+                                          class="accordion-collapse collapse"
+                                          aria-labelledby="flush-heading-2"
+                                          data-bs-parents="#questions"
+                                        >
+                                          <div class="accordion-body"><div class="col">
+                                            <div class="card mb-4 rounded-3 shadow-sm">
+                                              <div class="card-header py-3">
+                                                <h4 class="my-0 fw-normal">Free</h4>
+                                              </div>
+                                              <div class="card-body">
+                                                <h1 class="card-title pricing-card-title">$0<small class="text-muted fw-light">/mo</small></h1>
+                                                <ul class="list-unstyled mt-3 mb-4">
+                                                  <li>10 users included</li>
+                                                  <li>2 GB of storage</li>
+                                                  <li>Email support</li>
+                                                  <li>Help center access</li>
+                                                </ul>
+                                                <button type="button" class="w-100 btn btn-lg btn-outline-primary">Sign up for free</button>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        </div>
+                                      </div>
+                                </div>
+                            </div>
+                            <input type="button" name="next" class="next sub action-button" value="Continue" />
+                        </fieldset>
+                        <fieldset>
+                            <div class="d-flex justify-content-center flex-column align-items-center">
+                                <div aria-labelledby="swal2-title" aria-describedby="swal2-html-container"
+                                    class="swal2-popup swal2-modal swal2-icon-success swal2-show" tabindex="-1" role="dialog" aria-live="assertive"
+                                    aria-modal="true" style="display: grid;"><button type="button" class="swal2-close"
+                                        aria-label="Close this dialog" style="display: none;">×</button>
+                                    <ul class="swal2-progress-steps" style="display: none;"></ul>
+                                    <div class="swal2-icon swal2-success swal2-icon-show" style="display: flex;">
+                                        <div class="swal2-success-circular-line-left" style="background-color: rgb(255, 255, 255);"></div>
+                                        <span class="swal2-success-line-tip"></span> <span class="swal2-success-line-long"></span>
+                                        <div class="swal2-success-ring"></div>
+                                        <div class="swal2-success-fix" style="background-color: rgb(255, 255, 255);"></div>
+                                        <div class="swal2-success-circular-line-right" style="background-color: rgb(255, 255, 255);"></div>
+                                    </div><img class="swal2-image" style="display: none;">
+                                    <h2 class="swal2-title" id="swal2-title" style="display: block;">SUCCESS !</h2>
+                                    <div class="swal2-html-container" id="swal2-html-container" style="display: block;">You Have Successfully created a Profile</div>
+                                    <input class="swal2-input" style="display: none;"><input type="file" class="swal2-file" style="display: none;">
+                                    <div class="swal2-range" style="display: none;"><input type="range"><output></output></div><select
+                                        class="swal2-select" style="display: none;"></select>
+                                    <div class="swal2-radio" style="display: none;"></div><label for="swal2-checkbox" class="swal2-checkbox"
+                                        style="display: none;"><input type="checkbox"><span class="swal2-label"></span></label><textarea
+                                        class="swal2-textarea" style="display: none;"></textarea>
+                                    <div class="swal2-validation-message" id="swal2-validation-message" style="display: none;"></div>
+                                    <div class="swal2-actions" style="display: flex;">
+                                        <div class="swal2-loader"></div><button type="button" class="swal2-confirm swal2-styled" aria-label=""
+                                            style="display: none;">OK</button><button type="button" class="swal2-deny swal2-styled"
+                                            aria-label="" style="display: none;">No</button><button type="button" class="swal2-cancel swal2-styled"
+                                            aria-label="" style="display: none;">Cancel</button>
+                                    </div>
+                                    <div class="swal2-footer" style="display: none;"></div>
+                                    <div class="swal2-timer-progress-bar-container">
+                                        <div class="swal2-timer-progress-bar" style="display: none;"></div>
+                                    </div>
+                                </div>
+                                {% if page == "meta" %}
+                                <a class="btn btn-primary submitProfile" href="{% url 'metas' %}">Continue & Create Your First Node.</a>
+                                {% elif page == "project" %}
+                                <a class="btn btn-primary submitProfile" href="{% url 'project' %}"> Continue & Create Your First Node.</a>
+                                {% endif %}
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <div class="d-flex justify-content-center flex-column align-items-center">
+                                <div aria-labelledby="swal2-title" aria-describedby="swal2-html-container"
+                                    class="swal2-popup swal2-modal swal2-icon-success swal2-show" tabindex="-1" role="dialog" aria-live="assertive"
+                                    aria-modal="true" style="display: grid;"><button type="button" class="swal2-close"
+                                        aria-label="Close this dialog" style="display: none;">×</button>
+                                    <ul class="swal2-progress-steps" style="display: none;"></ul>
+                                    <div class="swal2-icon swal2-success swal2-icon-show" style="display: flex;">
+                                        <div class="swal2-success-circular-line-left" style="background-color: rgb(255, 255, 255);"></div>
+                                        <span class="swal2-success-line-tip"></span> <span class="swal2-success-line-long"></span>
+                                        <div class="swal2-success-ring"></div>
+                                        <div class="swal2-success-fix" style="background-color: rgb(255, 255, 255);"></div>
+                                        <div class="swal2-success-circular-line-right" style="background-color: rgb(255, 255, 255);"></div>
+                                    </div><img class="swal2-image" style="display: none;">
+                                    <h2 class="swal2-title" id="swal2-title" style="display: block;">SUCCESS !</h2>
+                                    <div class="swal2-html-container" id="swal2-html-container" style="display: block;">You Have Successfully created a Profile</div>
+                                    <input class="swal2-input" style="display: none;"><input type="file" class="swal2-file" style="display: none;">
+                                    <div class="swal2-range" style="display: none;"><input type="range"><output></output></div><select
+                                        class="swal2-select" style="display: none;"></select>
+                                    <div class="swal2-radio" style="display: none;"></div><label for="swal2-checkbox" class="swal2-checkbox"
+                                        style="display: none;"><input type="checkbox"><span class="swal2-label"></span></label><textarea
+                                        class="swal2-textarea" style="display: none;"></textarea>
+                                    <div class="swal2-validation-message" id="swal2-validation-message" style="display: none;"></div>
+                                    <div class="swal2-actions" style="display: flex;">
+                                        <div class="swal2-loader"></div><button type="button" class="swal2-confirm swal2-styled" aria-label=""
+                                            style="display: none;">OK</button><button type="button" class="swal2-deny swal2-styled"
+                                            aria-label="" style="display: none;">No</button><button type="button" class="swal2-cancel swal2-styled"
+                                            aria-label="" style="display: none;">Cancel</button>
+                                    </div>
+                                    <div class="swal2-footer" style="display: none;"></div>
+                                    <div class="swal2-timer-progress-bar-container">
+                                        <div class="swal2-timer-progress-bar" style="display: none;"></div>
+                                    </div>
+                                </div>
+                                {% if page == "meta" %}
+                                <a class="btn btn-primary submitProfile" href="{% url 'metas' %}">Continue & Create Your First Node.</a>
+                                {% elif page == "project" %}
+                                <a class="btn btn-primary submitProfile" href="{% url 'project' %}"> Continue & Create Your First Node.</a>
+                                {% endif %}
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <div class="d-flex justify-content-center flex-column align-items-center">
+                                <div aria-labelledby="swal2-title" aria-describedby="swal2-html-container"
+                                    class="swal2-popup swal2-modal swal2-icon-success swal2-show" tabindex="-1" role="dialog" aria-live="assertive"
+                                    aria-modal="true" style="display: grid;"><button type="button" class="swal2-close"
+                                        aria-label="Close this dialog" style="display: none;">×</button>
+                                    <ul class="swal2-progress-steps" style="display: none;"></ul>
+                                    <div class="swal2-icon swal2-success swal2-icon-show" style="display: flex;">
+                                        <div class="swal2-success-circular-line-left" style="background-color: rgb(255, 255, 255);"></div>
+                                        <span class="swal2-success-line-tip"></span> <span class="swal2-success-line-long"></span>
+                                        <div class="swal2-success-ring"></div>
+                                        <div class="swal2-success-fix" style="background-color: rgb(255, 255, 255);"></div>
+                                        <div class="swal2-success-circular-line-right" style="background-color: rgb(255, 255, 255);"></div>
+                                    </div><img class="swal2-image" style="display: none;">
+                                    <h2 class="swal2-title" id="swal2-title" style="display: block;">SUCCESS !</h2>
+                                    <div class="swal2-html-container" id="swal2-html-container" style="display: block;">You Have Successfully created a Profile</div>
+                                    <input class="swal2-input" style="display: none;"><input type="file" class="swal2-file" style="display: none;">
+                                    <div class="swal2-range" style="display: none;"><input type="range"><output></output></div><select
+                                        class="swal2-select" style="display: none;"></select>
+                                    <div class="swal2-radio" style="display: none;"></div><label for="swal2-checkbox" class="swal2-checkbox"
+                                        style="display: none;"><input type="checkbox"><span class="swal2-label"></span></label><textarea
+                                        class="swal2-textarea" style="display: none;"></textarea>
+                                    <div class="swal2-validation-message" id="swal2-validation-message" style="display: none;"></div>
+                                    <div class="swal2-actions" style="display: flex;">
+                                        <div class="swal2-loader"></div><button type="button" class="swal2-confirm swal2-styled" aria-label=""
+                                            style="display: none;">OK</button><button type="button" class="swal2-deny swal2-styled"
+                                            aria-label="" style="display: none;">No</button><button type="button" class="swal2-cancel swal2-styled"
+                                            aria-label="" style="display: none;">Cancel</button>
+                                    </div>
+                                    <div class="swal2-footer" style="display: none;"></div>
+                                    <div class="swal2-timer-progress-bar-container">
+                                        <div class="swal2-timer-progress-bar" style="display: none;"></div>
+                                    </div>
+                                </div>
+                                {% if page == "meta" %}
+                                <a class="btn btn-primary submitProfile" href="{% url 'metas' %}">Continue & Create Your First Node.</a>
+                                {% elif page == "project" %}
+                                <a class="btn btn-primary submitProfile" href="{% url 'project' %}"> Continue & Create Your First Node.</a>
+                                {% endif %}
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <div class="d-flex justify-content-center flex-column align-items-center">
+                                <div aria-labelledby="swal2-title" aria-describedby="swal2-html-container"
+                                    class="swal2-popup swal2-modal swal2-icon-success swal2-show" tabindex="-1" role="dialog" aria-live="assertive"
+                                    aria-modal="true" style="display: grid;"><button type="button" class="swal2-close"
+                                        aria-label="Close this dialog" style="display: none;">×</button>
+                                    <ul class="swal2-progress-steps" style="display: none;"></ul>
+                                    <div class="swal2-icon swal2-success swal2-icon-show" style="display: flex;">
+                                        <div class="swal2-success-circular-line-left" style="background-color: rgb(255, 255, 255);"></div>
+                                        <span class="swal2-success-line-tip"></span> <span class="swal2-success-line-long"></span>
+                                        <div class="swal2-success-ring"></div>
+                                        <div class="swal2-success-fix" style="background-color: rgb(255, 255, 255);"></div>
+                                        <div class="swal2-success-circular-line-right" style="background-color: rgb(255, 255, 255);"></div>
+                                    </div><img class="swal2-image" style="display: none;">
+                                    <h2 class="swal2-title" id="swal2-title" style="display: block;">SUCCESS !</h2>
+                                    <div class="swal2-html-container" id="swal2-html-container" style="display: block;">You Have Successfully created a Profile</div>
+                                    <input class="swal2-input" style="display: none;"><input type="file" class="swal2-file" style="display: none;">
+                                    <div class="swal2-range" style="display: none;"><input type="range"><output></output></div><select
+                                        class="swal2-select" style="display: none;"></select>
+                                    <div class="swal2-radio" style="display: none;"></div><label for="swal2-checkbox" class="swal2-checkbox"
+                                        style="display: none;"><input type="checkbox"><span class="swal2-label"></span></label><textarea
+                                        class="swal2-textarea" style="display: none;"></textarea>
+                                    <div class="swal2-validation-message" id="swal2-validation-message" style="display: none;"></div>
+                                    <div class="swal2-actions" style="display: flex;">
+                                        <div class="swal2-loader"></div><button type="button" class="swal2-confirm swal2-styled" aria-label=""
+                                            style="display: none;">OK</button><button type="button" class="swal2-deny swal2-styled"
+                                            aria-label="" style="display: none;">No</button><button type="button" class="swal2-cancel swal2-styled"
+                                            aria-label="" style="display: none;">Cancel</button>
+                                    </div>
+                                    <div class="swal2-footer" style="display: none;"></div>
+                                    <div class="swal2-timer-progress-bar-container">
+                                        <div class="swal2-timer-progress-bar" style="display: none;"></div>
+                                    </div>
+                                </div>
+                                {% if page == "meta" %}
+                                <a class="btn btn-primary submitProfile" href="{% url 'metas' %}">Continue & Create Your First Node.</a>
+                                {% elif page == "project" %}
+                                <a class="btn btn-primary submitProfile" href="{% url 'project' %}"> Continue & Create Your First Node.</a>
+                                {% endif %}
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type='text/javascript' src="{% static 'dist/js/bootstrap.bundle.js' %}"></script>
+    <script type='text/javascript' src="{% static 'dist/js/progresses.js' %}"></script>
+</body>
+
+</html>

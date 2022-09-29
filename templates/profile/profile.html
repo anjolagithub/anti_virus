@@ -455,7 +455,11 @@
                                         <div class="swal2-timer-progress-bar" style="display: none;"></div>
                                     </div>
                                 </div>
-                                <div class="btn btn-primary">Continue & Create Your First Node.</div>
+                                {% if page == "meta" %}
+                                <a class="btn btn-primary submitProfile" href="{% url 'metas' %}">Continue & Create Your First Node.</a>
+                                {% elif page == "project" %}
+                                <a class="btn btn-primary submitProfile" href="{% url 'project' %}"> Continue & Create Your First Node.</a>
+                                {% endif %}
                             </div>
                         </fieldset>
                     </form>
