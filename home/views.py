@@ -19,15 +19,15 @@ def profile(request):
 
     
 def metas(request):
-    some = Personal_Info(profile = request.user)
-    signer = Signer()
-    value = signer.sign(request.user)
+    some = Personal_Info.objects.filter(profile = request.user)
+    value = request.user
     context = {
         "u_token": value,
         "page": "meta"
     }
-    print(some.is_seller)
-    if some.is_seller == False:
+    print(some)
+    print(len(some))
+    if len(some) == 0:
         return render(request, 'profile/profile.html', context)
     return render(request, 'meta/index.html', context)
 

@@ -91,6 +91,7 @@ $(document).ready(function () {
 			console.log(data)
 		}
 	});
+    
 	$(".addo").click(function () {
 		var occupation = {};
 
