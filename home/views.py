@@ -2,22 +2,26 @@ from django.http import JsonResponse
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect, render
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from .form import CustomUserForm
 from .models import Message_Feedback
 from seller.models import Personal_Info
 from django.core.signing import Signer
+import json
 
 
 def home(request):
     return render(request, 'homes/home.html')
 
+@login_required(login_url="loginpage")
 def choice(request):
     return render(request, 'account/decisions.html')
 
+@login_required(login_url="loginpage")
 def profile(request):
     return render(request, 'account/decision.html')
 
-    
+@login_required(login_url="loginpage")
 def metas(request):
     some = Personal_Info.objects.filter(profile = request.user)
     value = request.user
@@ -31,17 +35,20 @@ def metas(request):
         return render(request, 'profile/profile.html', context)
     return render(request, 'meta/index.html', context)
 
+@login_required(login_url="loginpage")
 def projects(request):
-    some = Personal_Info(profile = request.user)
+    some = Personal_Info.objects.filter(profile = request.user)
     value = request.user
     context = {
         "u_token": value,
         "page": "project"
     }
-    print(some.is_seller)
-    if some.is_seller == False:
+    print(len(some))
+    if len(some) == 0:
         return render(request, 'profile/profile.html', context)
     return render(request, 'meta/indexs.html', context)
+
+
 
 def feedback(request):
     if request.method == 'POST':

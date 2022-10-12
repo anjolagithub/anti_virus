@@ -1,8 +1,9 @@
-from cgi import print_arguments
 from django.shortcuts import render
 from django.http import JsonResponse
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from seller.models import Personal_Info, Occupation_list, Languages, Professional_Info, Language_Levels, Occupation, Skill_list, Skill
 from django.core.signing import Signer
 import random
@@ -19,7 +20,7 @@ def get_random_code():
 
   return rand
 
-def soap(request):
+def create_profile(request):
   try:
     fullname = request.POST.get("info[fullname]", None)
     picture = request.POST.get("info[profile_pics]", None)
@@ -29,6 +30,9 @@ def soap(request):
     skill = request.POST.get("skill", None)
     langs = request.POST.get("language", None)
     
+    if fullname is None:
+      return JsonResponse({"status": "Full name is required"})
+
     sell = Personal_Info(profile=request.user, full_Name=fullname, profile_Picture=picture, description=description, is_seller=True, seller_mode=True)
     sell.save()
 
@@ -64,3 +68,23 @@ def soap(request):
   
   except:
     return JsonResponse({"status": "unknown error"})
+
+@login_required(login_url="loginpage")
+def submitProjects(request):
+    if request.method == "POST":
+        print(dir(request.user_agent))
+        print(request.user_agent.get_os())
+        print(request.user_agent.is_bot)
+        print(request.user_agent.get_device())
+        data = request.POST.get('data')
+        video = request.FILES.get('videoInput')
+        img1 = request.FILES.get('img1Input')
+        img2 = request.FILES.get('img2Input')
+        img3 = request.FILES.get('img3Input')
+        project = request.FILES.get('projectInput')
+        print(data)
+
+    return render(request, 'meta/lang.html')
+
+def create_meta(request):
+  pass

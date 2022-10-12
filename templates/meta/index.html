@@ -6,10 +6,10 @@
     <meta charset='utf-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <title>Snippet - BBBootstrap</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type='text/javascript' src="{% static 'dist/js/jquery.js' %}"></script>
     <link href="{% static 'dist/css/bootstrap.min.css' %}" rel='stylesheet'>
     <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css' rel='stylesheet'>
-    <script type='text/javascript' src="{% static 'dist/js/jquery.js' %}"></script>
+    <link href="{% static 'dist/css/style.css' %}" rel='stylesheet'>
     <script type='text/javascript' src="{% static 'dist/js/sweetalert.js' %}"></script>
     <style>
         ::-webkit-scrollbar {
@@ -46,7 +46,7 @@
 
         #heading {
             text-transform: uppercase;
-            color: #673AB7;
+            color: rgba(13, 110, 253, 1) !important;
             font-weight: normal;
         }
 
@@ -88,8 +88,8 @@
             width: 100%;
             box-sizing: border-box;
             font-family: montserrat;
-            color: #2C3E50;
-            background-color: #ECEFF1;
+            color: rgba(13, 110, 253, 1) !important;
+            background-color: #ECEFF1 !important;
             font-size: 16px;
             letter-spacing: 1px;
         }
@@ -99,16 +99,16 @@
             -moz-box-shadow: none !important;
             -webkit-box-shadow: none !important;
             box-shadow: none !important;
-            border: 1px solid #673AB7;
+            border: 1px solid rgba(13, 110, 253, 1) !important;
             outline-width: 0;
         }
 
         /*Next Buttons*/
         #msform .action-button {
             width: 100px;
-            background: #673AB7;
+            background: rgba(13, 110, 253, 1) !important;
             font-weight: bold;
-            color: white;
+            color: white !important;
             border: 0 none;
             border-radius: 0px;
             cursor: pointer;
@@ -119,15 +119,15 @@
 
         #msform .action-button:hover,
         #msform .action-button:focus {
-            background-color: #311B92;
+            background-color: rgba(13, 110, 253, 1) !important;
         }
 
         /*Previous Buttons*/
         #msform .action-button-previous {
             width: 100px;
-            background: #616161;
+            background: #616161 !important;
             font-weight: bold;
-            color: white;
+            color: white !important;
             border: 0 none;
             border-radius: 0px;
             cursor: pointer;
@@ -151,14 +151,14 @@
         /*FieldSet headings*/
         .fs-title {
             font-size: 25px;
-            color: #36377d;
+            color: rgba(13, 110, 253, 1) !important;
             margin-bottom: 15px;
             font-weight: normal;
             text-align: left;
         }
 
         .purple-text {
-            color: #36377d;
+            color: rgba(13, 110, 253, 1) !important;
             font-weight: normal;
         }
 
@@ -185,13 +185,13 @@
         }
 
         #progressbar .active {
-            color: #36377d;
+            color: rgba(13, 110, 253, 1) !important;
         }
 
         #progressbar li {
             list-style-type: none;
             font-size: 15px;
-            width: 25%;
+            width: 16%;
             float: left;
             position: relative;
             font-weight: 400;
@@ -247,7 +247,8 @@
         /*Color number of the step and the connector before it*/
         #progressbar li.active:before,
         #progressbar li.active:after {
-            background: #36377d;
+            /*background: #36377d;*/
+            background: rgba(13, 110, 253, 1) !important;
         }
 
         /*Animated Progress Bar*/
@@ -256,7 +257,7 @@
         }
 
         .progress-bar {
-            background-color: #36377d;
+            background-color: rgba(13, 110, 253, 1) !important;
         }
 
         /*Fit image in bootstrap div*/
@@ -283,11 +284,11 @@
         <div class="row justify-content-center">
             <div class="cos col-12 text-center px-5 mt-3 mb-2">
                 <div class="card px-5 pt-4 pb-0 mt-3 mb-3">
-                    <p>Let Create Your Profile First</p>
+                    <p>Let Us Create Your New Meta</p>
 
-                    <form id="msform">
+                    <form id="msform" method="post" action="{% url 'createMeta' %}" enctype="multipart/form-data">
                         {% csrf_token %}
-                        <input type="hidden" class="u_token" value="{{u_token}}">
+                        <input type="hidden" class="data" name="data">
                         <!-- progressbar -->
                         <ul id="progressbar">
                             <li class="active" id="personal"><strong>overview</strong></li>
@@ -300,14 +301,15 @@
                         <br>
                         <!-- fieldsets -->
                         <fieldset>
-                            
+
                             <div class="row mb-5">
                                 <div class="col-3">
-                                    <label for="exampleFormControlTextarea1" class="form-label">GIG TITLE<span
+                                    <label for="exampleFormControlTextarea1" class="form-label">META TITLE<span
                                             class="text-danger">*</span></label>
                                 </div>
                                 <div class="col-9">
-                                    <textarea class="form-control desc" id="exampleFormControlTextarea1" rows="4" placeholder="I will do something I'm really good at"></textarea>
+                                    <textarea class="form-control meta-title" id="exampleFormControlTextarea1" rows="4"
+                                        placeholder="I will do something I'm really good at"></textarea>
                                 </div>
                             </div>
                             <div class="row mb-5">
@@ -317,12 +319,12 @@
                                             class="text-danger">*</span></label>
                                 </div>
                                 <div class="col-5">
-                                    <input type="text" class="form-control skill" id="exampleFormControlInput1"
-                                        placeholder="SELECT A CATEGORY" required>
+                                    <input type="text" class="form-control category" id="exampleFormControlInput1"
+                                        placeholder="SELECT A CATEGORY">
                                 </div>
                                 <div class="col-4">
-                                    <input type="text" class="form-control level" id="exampleFormControlInput1"
-                                        placeholder="SELECT A SUBCATEGORY" required>
+                                    <input type="text" class="form-control sub-category" id="exampleFormControlInput1"
+                                        placeholder="SELECT A SUBCATEGORY">
                                 </div>
                             </div>
                             <div class="row mb-5">
@@ -331,65 +333,223 @@
                                             class="text-danger">*</span></label>
                                 </div>
                                 <div class="col-9">
-                                    <textarea class="form-control desc" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                    <textarea class="form-control search-tag" id="exampleFormControlTextarea1"
+                                        rows="3"></textarea>
+                                    <div class="row add-search">
+
+                                    </div>
                                 </div>
                                 <div class="col-12">
-                                    <h6 class="text-primary align-items-end mb-5 cursor btn addo">+Add New</h6>
-                                </div>
-                                <div class="col-12 occupv">
-                                    
+                                    <h6 class="text-primary align-items-end mb-5 cursor btn addBtn-search">+Add New</h6>
                                 </div>
                             </div>
 
-                            <p class="lead"><span class="danger">Please note: </span>Some categories require that sellers verify their skills.</p>
+                            <p class="lead"><span class="text-danger">Please note: </span>Some categories require that
+                                sellers verify their skills.</p>
                             <input type="button" name="next" class="next action-button" value="Continue" />
                         </fieldset>
                         <fieldset>
                             <div class="row mb-5">
-                                
-                                <div class="col-12">
-                                    <h6 class="text-primary align-items-end mb-5 cursor btn addo">+Add New</h6>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-floating mb-3">
+                                            <select class="form-select payType" id="floatingSelect">
+                                                <option>Basic</option>
+                                                <option>Premium</option>
+                                                <option>Special</option>
+                                            </select>
+                                            <label for="floatingSelect">Choose a Package</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-floating mb-3">
+                                            <input type="text" class="form-control payHeading" id="floatingInput"
+                                                placeholder="Basic">
+                                            <label for="floatingInput">header</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-floating mb-3">
+                                            <select class="form-select colorValue" id="floatingSelect">
+                                                <option>primary</option>
+                                                <option>danger</option>
+                                                <option>success</option>
+                                                <option>dark</option>
+                                            </select>
+                                            <label for="floatingSelect">Choose a Color</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-floating mb-3">
+                                            <input type="number" class="form-control price" id="floatingInput"
+                                                placeholder="$20.00">
+                                            <label for="floatingInput">Price in Dollar</label>
+                                        </div>
+                                        <div class="invalid-feedback">
+                                            Please select a valid price.
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-floating mb-3">
+                                            <select class="form-select duration" id="floatingSelect">
+                                                <option>1 day delivery</option>
+                                                <option>2 days delivery</option>
+                                                <option>3 days delivery</option>
+                                                <option>4 days delivery</option>
+                                                <option>5 days delivery</option>
+                                                <option>6 days delivery</option>
+                                                <option>1 Week delivery</option>
+                                                <option>2 Weeks delivery</option>
+                                                <option>3 Weeks delivery</option>
+                                                <option>4 Weeks delivery</option>
+                                                <option>1 Month delivery</option>
+                                                <option>2 Months delivery</option>
+                                                <option>3 Months delivery</option>
+                                                <option>4 Months delivery</option>
+                                                <option>5 Months delivery</option>
+                                                <option>6 Months delivery</option>
+                                                <option>7 Months delivery</option>
+                                                <option>8 Months delivery</option>
+                                                <option>9 Months delivery</option>
+                                                <option>10 Months delivery</option>
+                                                <option>11 Months delivery</option>
+                                                <option>1 year delivery</option>
+                                            </select>
+                                            <label for="floatingSelect">service time</label>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <hr class="my-4">
+                                        <h3 class="lead my-4">services offer</h3>
+                                        <div class="col-12">
+                                            <input type="text" class="form-control serviceInput" id="floatingInput"
+                                                placeholder="Full-Time Engagement">
+                                        </div>
+                                        <div class="col-12">
+                                            <h6 class="text-primary align-items-end mb-5 cursor btn serviceBtn">+Add Service
+                                            </h6>
+                                        </div>
+                                        <div class="col-12 text-lg-start add-service">
+                                            
+                                        </div>
+                                    </div>
+                                    <hr class="my-4">
                                 </div>
-                                <div class="col-12 occupv">
-                                    <div class="accordion-item">
-                                        <h2 class="accordion-header" id="flush-heading-1">
-                                          <button
-                                            class="accordion-button collapsed"
-                                            type="button"
-                                            data-bs-toggle="collapse"
-                                            data-bs-target="#flush-collapse-1"
-                                            aria-expanded="false"
-                                            aria-controls="flush-collapse-1"
-                                          >
-                                            Free
-                                          </button>
-                                        </h2>
-                                        <div
-                                          id="flush-collapse-1"
-                                          class="accordion-collapse collapse"
-                                          aria-labelledby="flush-heading-2"
-                                          data-bs-parents="#questions"
-                                        >
-                                          <div class="accordion-body"><div class="col">
-                                            <div class="card mb-4 rounded-3 shadow-sm">
-                                              <div class="card-header py-3">
-                                                <h4 class="my-0 fw-normal">Free</h4>
-                                              </div>
-                                              <div class="card-body">
-                                                <h1 class="card-title pricing-card-title">$0<small class="text-muted fw-light">/mo</small></h1>
-                                                <ul class="list-unstyled mt-3 mb-4">
-                                                  <li>10 users included</li>
-                                                  <li>2 GB of storage</li>
-                                                  <li>Email support</li>
-                                                  <li>Help center access</li>
-                                                </ul>
-                                                <button type="button" class="w-100 btn btn-lg btn-outline-primary">Sign up for free</button>
-                                              </div>
-                                            </div>
-                                          </div>
+                                <div class="col-12">
+                                    <h6 class="text-primary align-items-end mb-5 cursor btn addPayment">+Add New</h6>
+                                </div>
+                                <div class="col-12 payItem">
+                                    
+                                </div>
+                            </div>
+                            <input type="button" name="next" class="next sub action-button" value="Continue" />
+                        </fieldset>
+                        <fieldset>
+                            <h3 class="lead fw-bloder text-primary">Description</h3>
+                            <div class="row mb-3">
+                                <div class="col-12">
+                                    <textarea class="form-control description" id="exampleFormControlTextarea1" rows="4"
+                                        placeholder="Description"></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <hr class="my-4">
+                                    <h3 class="lead fw-bloder text-primary">FAQ</h3>
+                                    <hr class="my-4">
+                                </div>
+                                <div class="col-12">
+                                    <input type="text" class="form-control question" id="exampleFormControlInput1"
+                                        placeholder="Question">
+                                    <textarea class="form-control answer" id="exampleFormControlTextarea1" rows="4"
+                                        placeholder="Answer"></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <h6 class="text-primary align-items-end mb-5 cursor btn addFAQ">+Add New</h6>
+                                </div>
+                                <div class="col-12">
+                                    <div class="accordion faq" id="accordionExample">
+                                    
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="button" name="next" class="next sub action-button" value="Continue" />
+                        </fieldset>
+                        <fieldset>
+                            <div class="row mb-3">
+                                <div class="col-12">
+                                    <div class="card w-100 border mt-4">
+                                        <h3 class="fw-bold text-start pt-2 mx-3 text-primary">Tell your buyers what you
+                                            need to get started.</h3>
+                                        <small class=" mx-3 lead text-start">Structure your Buyer Instructions as free
+                                            text, a
+                                            multiple choice question or file upload.</small>
+                                        <div class="mt-5 pt-2 card border bg-light mx-3 mb-4">
+                                            <h3 class="lead text-start mb-3 mx-4 pt-0 text-primary">Requirement Note
+                                            </h3>
+                                            <textarea class="form-control border border-primary pb-4 requireNote"
+                                                id="exampleFormControlTextarea1" rows="4"
+                                                placeholder="#Requirement Note"></textarea>
                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="button" name="next" class="next sub action-button" value="Continue" />
+                        </fieldset>
+                        <fieldset>
+                            <div class="row mb-3">
+                                <hr class="p-2">
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-8">
+                                            <div class="text-start">Meta Video</div>
+                                            <p class="text-start">Add a relevant, high quality video that best showcases
+                                                your Meta.</p>
+                                            <div class="text-start text-muted pt-0">Please choose a video shorter than
+                                                75 seconds and smaller than 50mb</div>
                                         </div>
-                                      </div>
+                                        <div class="col-4 text-end videoNum">(0/1)</div>
+                                    </div>
+                                    <div class="bg-light border-secondary rounded-4 mt-4 video"
+                                        style="width: 250px; height: 250px;border-style: dashed"><input type="file" name="videoInput" class="videoInput" hidden accept=".mp4"></div>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <hr class="p-2">
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-8">
+                                            <div class="text-start">Meta Photos</div>
+                                            <p class="text-start">Upload photos that describe or are related to your
+                                                Meta.</p>
+                                        </div>
+                                        <div class="col-4 text-end imgNum">(0/3)</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-3 border-secondary rounded-4 bg-light mt-4 me-3 img1"
+                                            style="height: 250px;border-style: dashed"><input type="file" name="img1Input" class="img1Input" hidden accept=".png,.jpeg,.jpg"></div>
+                                        <div class="col-3 border-secondary rounded-4 bg-light mt-4 me-3 img2"
+                                            style="height: 250px;border-style: dashed"><input type="file" name="img2Input" class="img2Input" hidden accept=".png,.jpeg,.jpg"></div>
+                                        <div class="col-3 border-secondary rounded-4 bg-light mt-4 me-3 img3"
+                                            style="height: 250px;border-style: dashed"><input type="file" name="img3Input" class="img3Input" hidden accept=".png,.jpeg,.jpg"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <hr class="p-2">
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-8">
+                                            <div class="text-start">Meta PDFs</div>
+                                            <p class="text-start">We only recommend adding a PDF file if it further
+                                                clarifies the service you will be providing.</p>
+                                        </div>
+                                        <div class="col-4 text-end pdfNum">(0/2)</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-4 border-secondary rounded-4 bg-light mt-4 me-3 pdf1"
+                                            style="height: 250px;border-style: dashed"><input type="file" name="pdf1Input" class="pdf1Input" hidden accept=".pdf"></div>
+                                        <div class="col-4 border-secondary rounded-4 bg-light mt-4 me-3 pdf2"
+                                            style="height: 250px;border-style: dashed"><input type="file" name="pdf2Input" class="pdf2Input" hidden accept=".pdf"></div>
+                                    </div>
                                 </div>
                             </div>
                             <input type="button" name="next" class="next sub action-button" value="Continue" />
@@ -397,165 +557,52 @@
                         <fieldset>
                             <div class="d-flex justify-content-center flex-column align-items-center">
                                 <div aria-labelledby="swal2-title" aria-describedby="swal2-html-container"
-                                    class="swal2-popup swal2-modal swal2-icon-success swal2-show" tabindex="-1" role="dialog" aria-live="assertive"
-                                    aria-modal="true" style="display: grid;"><button type="button" class="swal2-close"
-                                        aria-label="Close this dialog" style="display: none;">×</button>
+                                    class="swal2-popup swal2-modal swal2-icon-success swal2-show" tabindex="-1"
+                                    role="dialog" aria-live="assertive" aria-modal="true" style="display: grid;"><button
+                                        type="button" class="swal2-close" aria-label="Close this dialog"
+                                        style="display: none;">×</button>
                                     <ul class="swal2-progress-steps" style="display: none;"></ul>
                                     <div class="swal2-icon swal2-success swal2-icon-show" style="display: flex;">
-                                        <div class="swal2-success-circular-line-left" style="background-color: rgb(255, 255, 255);"></div>
-                                        <span class="swal2-success-line-tip"></span> <span class="swal2-success-line-long"></span>
+                                        <div class="swal2-success-circular-line-left"
+                                            style="background-color: rgb(255, 255, 255);"></div>
+                                        <span class="swal2-success-line-tip"></span> <span
+                                            class="swal2-success-line-long"></span>
                                         <div class="swal2-success-ring"></div>
-                                        <div class="swal2-success-fix" style="background-color: rgb(255, 255, 255);"></div>
-                                        <div class="swal2-success-circular-line-right" style="background-color: rgb(255, 255, 255);"></div>
+                                        <div class="swal2-success-fix" style="background-color: rgb(255, 255, 255);">
+                                        </div>
+                                        <div class="swal2-success-circular-line-right"
+                                            style="background-color: rgb(255, 255, 255);"></div>
                                     </div><img class="swal2-image" style="display: none;">
                                     <h2 class="swal2-title" id="swal2-title" style="display: block;">SUCCESS !</h2>
-                                    <div class="swal2-html-container" id="swal2-html-container" style="display: block;">You Have Successfully created a Profile</div>
-                                    <input class="swal2-input" style="display: none;"><input type="file" class="swal2-file" style="display: none;">
-                                    <div class="swal2-range" style="display: none;"><input type="range"><output></output></div><select
-                                        class="swal2-select" style="display: none;"></select>
-                                    <div class="swal2-radio" style="display: none;"></div><label for="swal2-checkbox" class="swal2-checkbox"
-                                        style="display: none;"><input type="checkbox"><span class="swal2-label"></span></label><textarea
-                                        class="swal2-textarea" style="display: none;"></textarea>
-                                    <div class="swal2-validation-message" id="swal2-validation-message" style="display: none;"></div>
+                                    <div class="swal2-html-container" id="swal2-html-container" style="display: block;">
+                                        You Have Successfully gotten to the end.</div>
+                                    <p>Let's publish your Meta and get some buyers rolling in.</p>
+                                    <input class="swal2-input" style="display: none;"><input type="file"
+                                        class="swal2-file" style="display: none;">
+                                    <div class="swal2-range" style="display: none;"><input
+                                            type="range"><output></output></div><select class="swal2-select"
+                                        style="display: none;"></select>
+                                    <div class="swal2-radio" style="display: none;"></div><label for="swal2-checkbox"
+                                        class="swal2-checkbox" style="display: none;"><input type="checkbox"><span
+                                            class="swal2-label"></span></label><textarea class="swal2-textarea"
+                                        style="display: none;"></textarea>
+                                    <div class="swal2-validation-message" id="swal2-validation-message"
+                                        style="display: none;"></div>
                                     <div class="swal2-actions" style="display: flex;">
-                                        <div class="swal2-loader"></div><button type="button" class="swal2-confirm swal2-styled" aria-label=""
-                                            style="display: none;">OK</button><button type="button" class="swal2-deny swal2-styled"
-                                            aria-label="" style="display: none;">No</button><button type="button" class="swal2-cancel swal2-styled"
-                                            aria-label="" style="display: none;">Cancel</button>
+                                        <div class="swal2-loader"></div><button type="button"
+                                            class="swal2-confirm swal2-styled" aria-label=""
+                                            style="display: none;">OK</button><button type="button"
+                                            class="swal2-deny swal2-styled" aria-label=""
+                                            style="display: none;">No</button><button type="button"
+                                            class="swal2-cancel swal2-styled" aria-label=""
+                                            style="display: none;">Cancel</button>
                                     </div>
                                     <div class="swal2-footer" style="display: none;"></div>
                                     <div class="swal2-timer-progress-bar-container">
                                         <div class="swal2-timer-progress-bar" style="display: none;"></div>
                                     </div>
                                 </div>
-                                {% if page == "meta" %}
-                                <a class="btn btn-primary submitProfile" href="{% url 'metas' %}">Continue & Create Your First Node.</a>
-                                {% elif page == "project" %}
-                                <a class="btn btn-primary submitProfile" href="{% url 'project' %}"> Continue & Create Your First Node.</a>
-                                {% endif %}
-                            </div>
-                        </fieldset>
-                        <fieldset>
-                            <div class="d-flex justify-content-center flex-column align-items-center">
-                                <div aria-labelledby="swal2-title" aria-describedby="swal2-html-container"
-                                    class="swal2-popup swal2-modal swal2-icon-success swal2-show" tabindex="-1" role="dialog" aria-live="assertive"
-                                    aria-modal="true" style="display: grid;"><button type="button" class="swal2-close"
-                                        aria-label="Close this dialog" style="display: none;">×</button>
-                                    <ul class="swal2-progress-steps" style="display: none;"></ul>
-                                    <div class="swal2-icon swal2-success swal2-icon-show" style="display: flex;">
-                                        <div class="swal2-success-circular-line-left" style="background-color: rgb(255, 255, 255);"></div>
-                                        <span class="swal2-success-line-tip"></span> <span class="swal2-success-line-long"></span>
-                                        <div class="swal2-success-ring"></div>
-                                        <div class="swal2-success-fix" style="background-color: rgb(255, 255, 255);"></div>
-                                        <div class="swal2-success-circular-line-right" style="background-color: rgb(255, 255, 255);"></div>
-                                    </div><img class="swal2-image" style="display: none;">
-                                    <h2 class="swal2-title" id="swal2-title" style="display: block;">SUCCESS !</h2>
-                                    <div class="swal2-html-container" id="swal2-html-container" style="display: block;">You Have Successfully created a Profile</div>
-                                    <input class="swal2-input" style="display: none;"><input type="file" class="swal2-file" style="display: none;">
-                                    <div class="swal2-range" style="display: none;"><input type="range"><output></output></div><select
-                                        class="swal2-select" style="display: none;"></select>
-                                    <div class="swal2-radio" style="display: none;"></div><label for="swal2-checkbox" class="swal2-checkbox"
-                                        style="display: none;"><input type="checkbox"><span class="swal2-label"></span></label><textarea
-                                        class="swal2-textarea" style="display: none;"></textarea>
-                                    <div class="swal2-validation-message" id="swal2-validation-message" style="display: none;"></div>
-                                    <div class="swal2-actions" style="display: flex;">
-                                        <div class="swal2-loader"></div><button type="button" class="swal2-confirm swal2-styled" aria-label=""
-                                            style="display: none;">OK</button><button type="button" class="swal2-deny swal2-styled"
-                                            aria-label="" style="display: none;">No</button><button type="button" class="swal2-cancel swal2-styled"
-                                            aria-label="" style="display: none;">Cancel</button>
-                                    </div>
-                                    <div class="swal2-footer" style="display: none;"></div>
-                                    <div class="swal2-timer-progress-bar-container">
-                                        <div class="swal2-timer-progress-bar" style="display: none;"></div>
-                                    </div>
-                                </div>
-                                {% if page == "meta" %}
-                                <a class="btn btn-primary submitProfile" href="{% url 'metas' %}">Continue & Create Your First Node.</a>
-                                {% elif page == "project" %}
-                                <a class="btn btn-primary submitProfile" href="{% url 'project' %}"> Continue & Create Your First Node.</a>
-                                {% endif %}
-                            </div>
-                        </fieldset>
-                        <fieldset>
-                            <div class="d-flex justify-content-center flex-column align-items-center">
-                                <div aria-labelledby="swal2-title" aria-describedby="swal2-html-container"
-                                    class="swal2-popup swal2-modal swal2-icon-success swal2-show" tabindex="-1" role="dialog" aria-live="assertive"
-                                    aria-modal="true" style="display: grid;"><button type="button" class="swal2-close"
-                                        aria-label="Close this dialog" style="display: none;">×</button>
-                                    <ul class="swal2-progress-steps" style="display: none;"></ul>
-                                    <div class="swal2-icon swal2-success swal2-icon-show" style="display: flex;">
-                                        <div class="swal2-success-circular-line-left" style="background-color: rgb(255, 255, 255);"></div>
-                                        <span class="swal2-success-line-tip"></span> <span class="swal2-success-line-long"></span>
-                                        <div class="swal2-success-ring"></div>
-                                        <div class="swal2-success-fix" style="background-color: rgb(255, 255, 255);"></div>
-                                        <div class="swal2-success-circular-line-right" style="background-color: rgb(255, 255, 255);"></div>
-                                    </div><img class="swal2-image" style="display: none;">
-                                    <h2 class="swal2-title" id="swal2-title" style="display: block;">SUCCESS !</h2>
-                                    <div class="swal2-html-container" id="swal2-html-container" style="display: block;">You Have Successfully created a Profile</div>
-                                    <input class="swal2-input" style="display: none;"><input type="file" class="swal2-file" style="display: none;">
-                                    <div class="swal2-range" style="display: none;"><input type="range"><output></output></div><select
-                                        class="swal2-select" style="display: none;"></select>
-                                    <div class="swal2-radio" style="display: none;"></div><label for="swal2-checkbox" class="swal2-checkbox"
-                                        style="display: none;"><input type="checkbox"><span class="swal2-label"></span></label><textarea
-                                        class="swal2-textarea" style="display: none;"></textarea>
-                                    <div class="swal2-validation-message" id="swal2-validation-message" style="display: none;"></div>
-                                    <div class="swal2-actions" style="display: flex;">
-                                        <div class="swal2-loader"></div><button type="button" class="swal2-confirm swal2-styled" aria-label=""
-                                            style="display: none;">OK</button><button type="button" class="swal2-deny swal2-styled"
-                                            aria-label="" style="display: none;">No</button><button type="button" class="swal2-cancel swal2-styled"
-                                            aria-label="" style="display: none;">Cancel</button>
-                                    </div>
-                                    <div class="swal2-footer" style="display: none;"></div>
-                                    <div class="swal2-timer-progress-bar-container">
-                                        <div class="swal2-timer-progress-bar" style="display: none;"></div>
-                                    </div>
-                                </div>
-                                {% if page == "meta" %}
-                                <a class="btn btn-primary submitProfile" href="{% url 'metas' %}">Continue & Create Your First Node.</a>
-                                {% elif page == "project" %}
-                                <a class="btn btn-primary submitProfile" href="{% url 'project' %}"> Continue & Create Your First Node.</a>
-                                {% endif %}
-                            </div>
-                        </fieldset>
-                        <fieldset>
-                            <div class="d-flex justify-content-center flex-column align-items-center">
-                                <div aria-labelledby="swal2-title" aria-describedby="swal2-html-container"
-                                    class="swal2-popup swal2-modal swal2-icon-success swal2-show" tabindex="-1" role="dialog" aria-live="assertive"
-                                    aria-modal="true" style="display: grid;"><button type="button" class="swal2-close"
-                                        aria-label="Close this dialog" style="display: none;">×</button>
-                                    <ul class="swal2-progress-steps" style="display: none;"></ul>
-                                    <div class="swal2-icon swal2-success swal2-icon-show" style="display: flex;">
-                                        <div class="swal2-success-circular-line-left" style="background-color: rgb(255, 255, 255);"></div>
-                                        <span class="swal2-success-line-tip"></span> <span class="swal2-success-line-long"></span>
-                                        <div class="swal2-success-ring"></div>
-                                        <div class="swal2-success-fix" style="background-color: rgb(255, 255, 255);"></div>
-                                        <div class="swal2-success-circular-line-right" style="background-color: rgb(255, 255, 255);"></div>
-                                    </div><img class="swal2-image" style="display: none;">
-                                    <h2 class="swal2-title" id="swal2-title" style="display: block;">SUCCESS !</h2>
-                                    <div class="swal2-html-container" id="swal2-html-container" style="display: block;">You Have Successfully created a Profile</div>
-                                    <input class="swal2-input" style="display: none;"><input type="file" class="swal2-file" style="display: none;">
-                                    <div class="swal2-range" style="display: none;"><input type="range"><output></output></div><select
-                                        class="swal2-select" style="display: none;"></select>
-                                    <div class="swal2-radio" style="display: none;"></div><label for="swal2-checkbox" class="swal2-checkbox"
-                                        style="display: none;"><input type="checkbox"><span class="swal2-label"></span></label><textarea
-                                        class="swal2-textarea" style="display: none;"></textarea>
-                                    <div class="swal2-validation-message" id="swal2-validation-message" style="display: none;"></div>
-                                    <div class="swal2-actions" style="display: flex;">
-                                        <div class="swal2-loader"></div><button type="button" class="swal2-confirm swal2-styled" aria-label=""
-                                            style="display: none;">OK</button><button type="button" class="swal2-deny swal2-styled"
-                                            aria-label="" style="display: none;">No</button><button type="button" class="swal2-cancel swal2-styled"
-                                            aria-label="" style="display: none;">Cancel</button>
-                                    </div>
-                                    <div class="swal2-footer" style="display: none;"></div>
-                                    <div class="swal2-timer-progress-bar-container">
-                                        <div class="swal2-timer-progress-bar" style="display: none;"></div>
-                                    </div>
-                                </div>
-                                {% if page == "meta" %}
-                                <a class="btn btn-primary submitProfile" href="{% url 'metas' %}">Continue & Create Your First Node.</a>
-                                {% elif page == "project" %}
-                                <a class="btn btn-primary submitProfile" href="{% url 'project' %}"> Continue & Create Your First Node.</a>
-                                {% endif %}
+                                <a class="btn btn-primary" href="{% url 'project' %}"> Save & Publish.</a>
                             </div>
                         </fieldset>
                     </form>
@@ -564,7 +611,7 @@
         </div>
     </div>
     <script type='text/javascript' src="{% static 'dist/js/bootstrap.bundle.js' %}"></script>
-    <script type='text/javascript' src="{% static 'dist/js/progresses.js' %}"></script>
+    <script type='text/javascript' src="{% static 'dist/js/meta.js' %}"></script>
 </body>
 
 </html>

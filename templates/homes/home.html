@@ -53,6 +53,9 @@
                         <a class="nav-link active" aria-current="page" href="#">Home</a>
                       </li>
                       <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'meta' %}">Become a Node</a>
+                      </li>
+                      <li class="nav-item">
                         <a class="nav-link" href="#about">About Us</a>
                       </li>
                       <li class="nav-item">
@@ -110,7 +113,7 @@
               >
               <a
                 class="btn btn-outline-success btn-lg m-2"
-                href="{% url 'meta' %}"
+                href="{% url 'loginpage' %}"
                 role="button"
                 >Let's Get Started</a
               >
@@ -430,6 +433,7 @@
     <script src="{% static 'dist/js/sweetalert.js' %}"></script>
     <script src="{% static 'dist/js/alertify.min.js' %}"></script>
     <script src="{% static 'dist/js/custom.js' %}"></script>
+    <script src="{% static 'dist/js/alertify.min.js' %}"></script>
     <script>
       alertify.set("notifier", "position", "top-right");
       {% for msg in messages %}

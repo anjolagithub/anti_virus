@@ -1,0 +1,33 @@
+<div class="accordion-item">
+  <h2 class="accordion-header" id="flush-heading-${pay_count}">
+    <button class="accordion-button p-3 border border-primary btn btn-outline-primary fs-5 fw-bolder text-muted"
+      type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-${pay_count}" aria-expanded="false"
+      aria-controls="flush-collapse-${pay_count}">
+      ${payType}
+    </button>
+  </h2>
+  <div id="flush-collapse-${pay_count}" class="accordion-collapse collapse" aria-labelledby="flush-heading-2"
+    data-bs-parents="#questions">
+    <div class="accordion-body border">
+      <div class="col d-flex justify-content-center">
+        <div class="card mb-4 rounded-3 shadow-sm w-50 mt-4">
+          <div class="card-header py-3 bg-${colorValue} text-light">
+            <h4 class="my-0 fw-normal">${payHead}</h4>
+          </div>
+          <div class="card-body">
+            <h1 class="card-title pricing-card-title">${price}<small class="text-muted fw-light"> Ethers</small></h1>
+            <ul class="list-unstyled mt-3 mb-4">
+
+              <li>Full-Time Engagement</li>
+              <li>7 pages</li>
+              <li>schedule posts</li>
+              <li>1 day delivery</li>
+            </ul>
+            <button type="button" class="w-100 btn btn-lg btn-outline-primary">Continue
+              with ${price} Ethers (${duration})</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
